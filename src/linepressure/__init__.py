@@ -1,8 +1,6 @@
-from typing import Iterable, Optional, Union
+from typing import Iterable, Optional, Tuple
 
-import matplotlib
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 import matplotlib.lines as lines
 import numpy as np
 import tqdm
@@ -16,7 +14,7 @@ class PointCollection:
         self._d = None
 
     @classmethod
-    def from_circle(cls, center: tuple[int, int], radius: int, n: int = 100):
+    def from_circle(cls, center: Tuple[int, int], radius: int, n: int = 100):
         angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
 
         x = radius * np.cos(angles) + center[0]
@@ -33,7 +31,7 @@ class PointCollection:
     def n_points(self) -> int:
         return self.points.shape[0]
 
-    def neighbouring_indexes(self, of: int) -> tuple[Optional[int], Optional[int]]:
+    def neighbouring_indexes(self, of: int) -> Tuple[Optional[int], Optional[int]]:
         lower = of - 1 if of > 0 else self.n_points() - 1
         higher = of + 1 if of < self.n_points() - 1 else 0
 
